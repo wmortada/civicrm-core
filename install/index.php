@@ -295,6 +295,11 @@ elseif ($installType == 'backdrop') {
       require_once $backdropVersionFile;
     }
   }
+
+  // Load Backdrop settings file
+  $backdropSettings = implode(CIVICRM_DIRECTORY_SEPARATOR, array($cmsPath, 'settings.php'));
+  require_once $backdropSettings;
+
   if (!defined('BACKDROP_VERSION') or version_compare(BACKDROP_VERSION, '1.0') < 0) {
     $errorTitle = ts("Oops! Incorrect Backdrop version");
     $errorMsg = ts("This version of CiviCRM can only be used with Backdrop 1.x. Please ensure that '%1' exists if you are running Backdrop 1.0 and over.", array(1 => implode("' or '", $backdropVersionFiles)));
@@ -363,10 +368,10 @@ if ($installType == 'backdrop') {
   }
   else {
     $backdropConfig = array(
-      "server" => "localhost",
-      "username" => "backdrop",
-      "password" => "",
-      "database" => "backdrop",
+      "server" => parse_url($database, PHP_URL_HOST),
+      "username" => parse_url($database, PHP_URL_USER),
+      "password" => parse_url($database, PHP_URL_PASS),
+      "database" => ltrim(parse_url($database, PHP_URL_PATH), '/')
     );
   }
 }
