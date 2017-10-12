@@ -298,7 +298,9 @@ elseif ($installType == 'backdrop') {
 
   // Load Backdrop settings file
   $backdropSettings = implode(CIVICRM_DIRECTORY_SEPARATOR, array($cmsPath, 'settings.php'));
-  require_once $backdropSettings;
+  if (file_exists($backdropSettings)){
+    require_once $backdropSettings;
+  }
 
   if (!defined('BACKDROP_VERSION') or version_compare(BACKDROP_VERSION, '1.0') < 0) {
     $errorTitle = ts("Oops! Incorrect Backdrop version");
