@@ -344,8 +344,12 @@ if ($installType == 'drupal') {
     $drupalConfig = $_POST['drupal'];
   }
   else {
+    $dbServer = $databases['default']['default']['host'];
+    if (!empty($databases['default']['default']['port'])) {
+      $dbServer .= ':' . $databases['default']['default']['port'];
+    }
     $drupalConfig = array(
-      "server" => $databases['default']['default']['host'] . ':' . $databases['default']['default']['port'],
+      "server" => $dbServer,
       "username" => $databases['default']['default']['username'],
       "password" => $databases['default']['default']['password'],
       "database" => $databases['default']['default']['database'],
@@ -359,8 +363,12 @@ if ($installType == 'backdrop') {
     $backdropConfig = $_POST['backdrop'];
   }
   else {
+    $dbServer = parse_url($database, PHP_URL_HOST);
+    if (!empty(parse_url($database, PHP_URL_PORT))) {
+      $dbServer .= ':' . parse_url($database, PHP_URL_PORT);
+    }
     $backdropConfig = array(
-      "server" => parse_url($database, PHP_URL_HOST),
+      "server" => $dbServer,
       "username" => parse_url($database, PHP_URL_USER),
       "password" => parse_url($database, PHP_URL_PASS),
       "database" => ltrim(parse_url($database, PHP_URL_PATH), '/')
