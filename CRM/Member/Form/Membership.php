@@ -214,7 +214,7 @@ class CRM_Member_Form_Membership extends CRM_Member_Form {
     $this->assign('formClass', 'membership');
     parent::preProcess();
     if ($this->isUpdateToExistingRecurringMembership()) {
-      $this->entityFields['end_date']['is_freeze'] = TRUE;
+//      $this->entityFields['end_date']['is_freeze'] = TRUE;
     }
     // get price set id.
     $this->_priceSetId = CRM_Utils_Array::value('priceSetId', $_GET);
@@ -608,7 +608,7 @@ class CRM_Member_Form_Membership extends CRM_Member_Form {
         CRM_Member_StatusOverrideTypes::getSelectOptions()
       );
       if ($statusOverride && $isUpdateToExistingRecurringMembership) {
-        $statusOverride->freeze();
+//        $statusOverride->freeze();
       }
 
       $this->add('datepicker', 'status_override_end_date', ts('Status Override End Date'), '', FALSE, ['minDate' => time(), 'time' => FALSE]);
