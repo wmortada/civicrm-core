@@ -73,4 +73,16 @@
     </html>
   </field>
 
+  <field>
+    <name>is_reserved</name>
+    <title>Is Reserved</title>
+    <comment>Is this role reserved?</comment>
+    <type>boolean</type>
+    <default>0</default>
+    <required>true</required>
+    <html>
+      <type>CheckBox</type>
+    </html>
+  </field>
+
 </table>
